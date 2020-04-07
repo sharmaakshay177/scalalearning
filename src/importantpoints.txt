@@ -1,0 +1,18 @@
+1. lazy val
+when we initialized the variable it gets the memory allocation
+at the same time of initilization.
+But on the other hand when we declare it as a lazy
+val it will only be allocated when it is called or
+required
+
+2. yield for collecting the result for a for loop we use yield
+you can also assign it to a var/any collection
+
+3. function syntax
+and the last statement determine the return type of the function
+Unit when we don't want to return any-thing
+def function_name(Params:params type):return type = {
+ computation
+}
+
+4.
