@@ -1,8 +1,5 @@
 package questions.Scala99Problems.Easy
 
-import TypeParameters.Pair
-
-import scala.collection.mutable
 import scala.collection.mutable.{ListBuffer, Stack}
 import util.control.Breaks._ // using breakable for continue and break statements
 object MiniListUtils{
@@ -84,6 +81,15 @@ object MiniListUtils{
     newList.toList
   }
 
+  //Remove Kth element from the List
+  def removeKthElement(k: Int, list: List[Any]): (List[Any], Any) ={
+    val array = list.toArray
+    val element = array(k)
+    def removeElement(ele: Any, list: List[Any]): List[Any] = list.diff(List(ele))
+    val newList = removeElement(element, list)
+    Tuple2(newList, element)
+  }
+
   //Get Count of the elements in the sequence
 //  def getSequenceElementCount[A,B](list: List[A]): List[B]={
 //    val stack = new Stack[Any]()
@@ -99,6 +105,7 @@ object MiniListUtils{
 }
 
 object ListProblems extends App{
+  import MiniListUtils._
 
   //Initiating a List
   val list:List[Int] = List[Int](1,1,2,3,5,8)
@@ -106,7 +113,7 @@ object ListProblems extends App{
   val palindromeList2: List[Int] = List[Int](1,2,3,5,3,2,1)
   val listInList: List[Any] = List[Any](List(1,1),2,List(3,List(5,8)))
   val duplicateList: List[Symbol] = List[Symbol]('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
-
-  val newList = MiniListUtils.duplicate(list).toString()
-  println(newList)
+  val listNum = (1 to 10).toList
+  val tupleFromFunction = removeKthElement(1, listNum)
+  println(tupleFromFunction._1.mkString("--"), tupleFromFunction._2)
 }

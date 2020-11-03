@@ -1,13 +1,13 @@
 package questions.Scala99Problems.Medium
 import scala.collection.mutable.ListBuffer
-import util.control.Breaks.{breakable}
+import util.control.Breaks.breakable
 import scala.math._
 
 
 object UtilityPackage{
   def duplicateGivenTimes(num: Int, list: List[Any]): List[Any] ={
     val newList = ListBuffer[Any]()
-    list.map(sym => {
+    list.foreach(sym => {
       for(i <- 1 to 3){
         newList.+=(sym)
       }
@@ -22,7 +22,7 @@ object UtilityPackage{
         if (counter % num == 0){
           counter = counter + 1
         }else{
-          newList +=(item)
+          newList += item
           counter = counter + 1
         }
       }
@@ -49,6 +49,19 @@ object UtilityPackage{
     }
 
   }
+  def subGroupingASetSimple(list: List[String]): List[List[String]] ={
+    val permutation = list.permutations.toList
+    permutation
+  }
+  def subGroupingASet(listNum: List[Int], list: List[String]): List[List[List[String]]] ={
+    //create a grouping of 2,3,4
+    val listToHoldAll =new ListBuffer()
+    listNum.map(num => {
+      val listTemp = list.combinations(num).toList
+      listToHoldAll.:++(listTemp)
+    })
+    listToHoldAll.toList
+  }
 
 }
 
@@ -61,7 +74,14 @@ object DuplicateCharByCount extends App{
   val dropNthTime = dropEveryNthElement(4, numList).toString()
   val slicedList = sliceFromList(4,10,numList).toString
   val rotated = rotate(-3,numList).mkString("--")
-  println(rotated)
+
+  val nameList = List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida")
+  val groupedList = subGroupingASetSimple(nameList).mkString("#")
+  val numGroupedList = subGroupingASet(List(2, 2, 5), nameList)
+  for (item <- numGroupedList){
+    println(item)
+  }
+
 
 
 
