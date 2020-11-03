@@ -1,10 +1,5 @@
 package HigherOrderFunction
 
-
-import com.sun.xml.internal.fastinfoset.tools.FI_SAX_Or_XML_SAX_SAXEvent
-import javafx.util.Pair
-
-import scala.collection.mutable.ListBuffer
 object definition {
 
   def square(num:Int):Int = num*num
