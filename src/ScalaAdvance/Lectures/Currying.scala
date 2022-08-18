@@ -1,6 +1,6 @@
 package ScalaAdvance.Lectures
 
-object Currying extends App{
+object Currying{
 
   val simpleAddFunction  = (x: Int, y: Int) => x + y
   def simpleAddMethod(x: Int, y: Int): Int = x + y
@@ -26,5 +26,90 @@ object Currying extends App{
   def representationWithDiffFormats(x: Double)(formatRep: String): String =  formatRep.format(x)
   val passFormatTo = representationWithDiffFormats(sum)(_: String)
   formats.map(format => println(passFormatTo(format)))
+
+}
+
+
+class CurriedClass(a: Int, b:Int, c:Int, funcPassed: () => String)(d: String, e: String){
+  def printFirstArgs: Unit = println(s"$a - $b - $c")
+  def printSecondArgs: Unit = println(s"$d - $e")
+  def resultOfFunctionPassed: Unit = println(funcPassed())
+}
+
+object AnotherCurrying extends App{
+  // curried functions
+  val superAdder: Int => Int => Int = x => y => x + y
+
+  // add 7 exercise
+  val add7One: Int => Int = (x : Int) => x + 7
+  def add7Two(x:Int): Int = x + 7
+  def add7Three(x: Int = 7)(y: Int): Int = x + y
+
+  val add7_1 = add7One(7)
+  val add7_2 = add7Two(7)
+  val add7_3 = add7Three(7) _
+
+  // underscores are powerful
+  def concatinate(a: String, b: String, c: String): String = a + b + c
+  val inserName = concatinate("Hi my name is ", _: String, " how are you?")
+  println(inserName("Akshay"))
+
+  // functions vs methods
+  // params by-name vs 0-lambda
+
+  def byName1(n: Int): Int = n + 1
+  def byName(n: => Int): Int = n + 1
+  def byFunction(f: () => Int) = f() + 1
+
+  def method: Int = 42
+  def paranMethod(): Int = 42
+
+  /*
+    calling byName and ByFunction
+    -  int
+    - method
+    - paranmethod
+    - lambda
+    - PAF
+   */
+  val someLambda = (x: Int) => x
+
+  val callingByIntWithByName = byName(10)
+  //val callingByIntWithByFunction = byFunction(10)
+
+  val callingByMethodWithByName = byName(method)
+  //val callingByMethodWithByFunction = byFunction(method)
+
+  val callingByParamMethodWithByName = byName(paranMethod())
+  val callingByParamMethodWithByFunction = byFunction(paranMethod)
+
+  val callingByLambdaWithByName = byName((() => 42)())
+  val callingByLambdaWithByFunction = byFunction(() => 42)
+
+  //val callingByPAFWithByName = byName(paranMethod _)
+  val callingByPAFWithByFunction = byFunction(paranMethod _)
+
+
+  def returnName(): String = "Akshay"
+
+  // working with curryied class
+  val obj = new CurriedClass(10,20,30, () => "AkshaySharma")("String1", "String2")
+  obj.printFirstArgs
+  obj.printSecondArgs
+  obj.resultOfFunctionPassed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

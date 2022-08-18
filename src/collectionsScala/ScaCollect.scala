@@ -31,9 +31,9 @@ object collectionUse extends App {
   val combinationArr3 = arr.combinations(3)
   combinationArr3.foreach(println(_))
 
-  val names:List[String] = List("Peter", "Paul", "Mary")
-  val namesArr:Array[String] = Array("Peter", "Paul", "Mary")
+  val names: List[String] = List("Peter", "Paul", "Mary")
+  val namesArr: Array[String] = Array("Peter", "Paul", "Mary")
   namesArr.mapInPlace(_.toUpperCase).foreach(println(_))
-  val completeName:ListBuffer[String] = new ListBuffer[String]
+  val completeName: ListBuffer[String] = new ListBuffer[String]
 
 }

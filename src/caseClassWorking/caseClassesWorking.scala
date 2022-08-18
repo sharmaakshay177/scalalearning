@@ -15,6 +15,10 @@ case class Doller(value:Double) extends Amount{
 
 case class Currency(value:Double,unit:Option[String]) extends Amount
 
+final case class Person(firsName: String, lastName: String){
+  def fullName: String = f"$firsName$lastName"
+}
+
 object caseClassesUse extends App{
   val d1:Doller = Doller(65.21)
   println(d1.value)

@@ -9,19 +9,18 @@ object weekend{
       case _ => "only first three defined"
     }
   }
-  def instanceMatching(instance:Any):Any = {
+  def instanceMatching(instance:Any): Boolean = {
     instance match {
-      case x:Map[String,String] => instance.isInstanceOf[Map[String,String]]
-      case y:List[Int] => instance.isInstanceOf[List[Int]]
-      case _ => "some thing else is passed"
+      case x:Map[String,String] => x.isInstanceOf[Map[String,String]]
+      case y:List[Int] => y.isInstanceOf[List[Int]]
+      case _ => false
     }
   }
 }
 
 object patternMatching extends App{
-  val mapinstance:Map[String,String] =Map[String,String](
-    "firstname"-> "akshay","lastname" -> "sharma")
-  val instanceofList:List[Int] = List(1,2,3)
+  val mapinstance: Map[String,String] = Map[String,String]("firstname"-> "akshay","lastname" -> "sharma")
+  val instanceofList: List[Int] = List(1,2,3)
 
   val isMapinst = weekend.instanceMatching(mapinstance)
   val isListinst = weekend.instanceMatching(instanceofList)

@@ -1,15 +1,19 @@
 package HigherOrderFunction
+
+import scala.annotation.tailrec
+
 /*
 currying is the process of turning a function that take two
 arguments into a function that takes one argument.
  */
 
 object FunctionCurrying {
-  def mulbytwo(a:Int)(b:Int) = a*b
+  def mulByTwo(a:Int)(b:Int): Int = a*b
 }
 
 object FunctionCurryUse extends App{
-  def until(condition: => Boolean) (block: => Unit): Unit ={
+  @tailrec
+  def until(condition: => Boolean)(block: => Unit): Unit ={
     if (!condition){
       block
       until(condition)(block)

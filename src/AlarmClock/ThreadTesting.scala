@@ -108,5 +108,6 @@ object ThreadTesting  extends App{
   // stopping the thread
   //actorSystem.stop(myActor)
 
+  actorSystem.terminate()
 
 }

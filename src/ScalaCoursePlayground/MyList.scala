@@ -153,9 +153,22 @@ class Cons[A](h: A, t: MyList[A]) extends MyList[A]{
     go(this.h, this.t, 0)
   }
 
-  override def sum: Int = ???
+  override def sum: Int ={
+    @tailrec
+    def helper(head: A, tail: MyList[A], acc: Int): Int ={
+      if (tail.isEmpty) acc + head.asInstanceOf[Int]
+      else helper(tail.head, tail.tail, acc + head.asInstanceOf[Int])
+    }
+    helper(this.head, this.tail, 0)
+  }
 
-  override def product: Double = ???
+  override def product: Double ={
+    @tailrec
+    def helper(head: A, tail: MyList[A], acc: Double): Double =
+      if (tail.isEmpty) acc * head.asInstanceOf[Double]
+      else helper(tail.head, tail.tail, acc * head.asInstanceOf[Double])
+    helper(this.head, this.tail, 1)
+  }
 }
 
 object ListTesting extends App{
@@ -172,10 +185,13 @@ object ListTesting extends App{
   println(list.length)
   println("sum = "+ list.sum)
   println("Non Zero List product = " + list.product)
-  println("Non Zero List product = " + listWithZero.product)
+  println("Zero List product = " + listWithZero.product)
 
   println(list.at(5))
   println(list.indexOf(10))
+
+  println(f"sum of the list is ${listWithZero.sum}")
+  println(f"sum of the list is ${listWithZero.product}")
 }
 
 

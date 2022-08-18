@@ -11,6 +11,12 @@ object PimpUpImplicits extends App {
   println("akshay".encrypt)
 
   implicit class EnrichInt(val value: Int) extends AnyVal{
-
+    def isEven: Boolean = value % 2 == 0
+    def squareRoot: Double =  Math.sqrt(value)
+    def square: Double = value * value
   }
+
+  println(42.isEven)
+  println(42.squareRoot)
+  println(42.square)
 }

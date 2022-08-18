@@ -1,6 +1,6 @@
 package ScalaAdvance.Lectures
 
-object Implicits extends App{
+object Implicits{
 
   case class Person(name: String, age: Int)
 
@@ -47,4 +47,43 @@ object Implicits extends App{
     Purchase(4,40)
   )
   println(itemPurchased.sorted)
+}
+
+object ImplicitWorking extends App{
+
+  // making a tuple
+  val tup1 = Tuple2(10,20)
+  val pair = "Akshay" -> "Sharma"
+
+  case class PersonAny[T](name: T){
+    def greet = s"Hi, My name is $name"
+  }
+  case class AgeMessage(age: Int){
+    def ageString: String = s"Hi My age is $age"
+  }
+
+  implicit def stringToPerson(str: String): PersonAny[String] = PersonAny[String](str)
+  implicit def numToAgeMessage(num: Int): AgeMessage = AgeMessage(num)
+
+  val greetMessageFromAkshay = "Akshay".greet // (stringToPerson("Akshay").greet
+  println(greetMessageFromAkshay)
+  val ageMessage = 25.ageString // (numToAgeMessage(25).ageString
+  println(ageMessage)
+
+  /*
+    implicits:
+      - val/var
+      - object
+      - accessor methods = def with no parentheses
+   */
+  /*
+    Implicit scope
+    - local scope (local scope)
+    - imported Scope
+    - companion objects of all types involved in the method signature
+   */
+
+  // "6" / 2
+  implicit def stringToInt(str: String): Int = Integer.valueOf(str)
+  println("6" / 2)
 }
